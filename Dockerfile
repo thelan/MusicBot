@@ -1,4 +1,4 @@
-FROM alpine:edge
+FROM python:3.6-alpine
 
 # Add project source
 WORKDIR /usr/src/musicbot
@@ -21,6 +21,8 @@ RUN apk update \
   make \
   musl-dev \
   python3-dev \
+  py3-pip \
+  py3-wheel \
 \
 # Install pip dependencies
 && pip3 install --no-cache-dir -r requirements.txt \
@@ -31,6 +33,7 @@ RUN apk update \
 
 # Create volume for mapping the config
 VOLUME /usr/src/musicbot/config
+VOLUME /usr/src/musicbot/audio_cache
 
 ENV APP_ENV=docker
 
